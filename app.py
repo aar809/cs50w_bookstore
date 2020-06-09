@@ -13,6 +13,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
+
+
 @app.route('/')
 def index():
 	return "OK! Yes"
