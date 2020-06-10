@@ -175,6 +175,7 @@ def book(isbn):
 			new_likes = likes+1
 			db.execute("UPDATE reviews SET likes = :new_likes WHERE review_id = :review_id",{"new_likes": new_likes, "review_id": review_id})
 			db.commit()
+			flash("Review liked!")
 			return redirect("/book/"+isbn)
 			# db.execute("DELETE FROM reviews WHERE user_id = :user_id", {"user_id" :user_id})
 			# db.commit()
