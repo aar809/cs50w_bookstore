@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    - Register
+{% endblock %}
+
+{% block main %}
+    <script>
+    //     function funct()
+    //     {
+    //         document.querySelector("#result").innerHTML = document.querySelector("#password").value;
+    //         document.querySelector("#result2").innerHTML = document.querySelector("#password2").value;
+    //     }
+    // </script>
+
+    <h1>Registration</h1>
+    <div>Please enter your name, and a unique username and password below:
+    <br>
+    <br>
+    <form action="/register" method="post" onsubmit="funct();return true;">
+    <!--<form action="/register" method="post">-->
+        <div class="form-group"> <b>
+           First Name: <input autocomplete="off" autofocus class="form-control" ID="firstname" name="first_name" placeholder="First Name" type="text">
+        </div>
+        <div class="form-group">
+            Last Name: <input autocomplete="off" class="form-control" ID="lastname" name="last_name" placeholder="Last Name" type="text">
+        </div>
+        <div class="form-group">
+            Username: <input autocomplete="off" class="form-control" ID="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            Password: <input class="form-control" name="password" placeholder="Password" type="password" id="password">
+        </div>
+        <div class="form-group">
+            Password (confirm): <input class="form-control" name="password2" placeholder="Confirm Password" type="password" id="password2">
+        </b></div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <br>
+    <div>(Note that usernames cannot have a space or any special characters.
+    Passwords must be at least 8 characters long, and have AT LEAST 1 lowercase letter, 1 uppercase letter, and 1 number.)
+    </div>
+    <div id="result">
+
+    </div>
+    <div id="result2">
+
+    </div>
+
+    <!--<div>-->
+    <!--Testing - Hi {{ password3  }}!-->
+    <!--</div>-->
+
+
+{% endblock %}

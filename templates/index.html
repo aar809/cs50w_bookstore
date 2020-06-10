@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    - Homepage
+{% endblock %}
+
+{% block main %}
+<script>
+</script>
+
+
+    <h1>Bookstore
+<!--     <span class="red">B</span>
+    <span class="yellow">o</span>
+    <span class="green">o</span> 
+    <span class="red">k</span> -->
+    </h1>
+
+Search for your favourite books!
+
+<main class="container p-5">
+
+    <form action="/" method="post" onsubmit="funct();return true;">
+    <!--<form action="/register" method="post">-->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" ID="book" name="book" placeholder="Book Name, ISBN, or Author" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    - Search Results
+{% endblock %}
+
+{% block main %}
+<script>
+</script>
+
+
+<h1>Results</h1>
+	Here are your search results:
+
+<main class="container p-5">
+
+    <form action="/" method="post" onsubmit="funct();return true;">
+    <!--<form action="/register" method="post">-->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" ID="book" name="book" placeholder="Book Name, ISBN, or Author" type="text">
+        </div>
+<!--         <button class="btn btn-primary" type="submit">Search</button> -->
+    </form>
+</main>
+
+<main class="container p-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>ISBN</th>
+            </tr>
+        </thead>
+	        <tbody>
+	            {% for i in results %}
+	                <tr>
+	                    <td><a href="/book/{{i['isbn']}}"> {{i["title"]}}</a></td>
+	                    <td>{{i["author"]}}</td>
+	                    <td>{{ i['year'] }}</td>	                    
+	                    <td><a href="/book/{{i['isbn']}}"> {{ i['isbn'] }} </a></td>
+	                </tr>
+	            {% endfor %}
+	        </tbody>
+    </table>
+</main>
+
+{% endblock %}

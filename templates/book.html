@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    - {{rows[0]["title"]}}
+
+{% endblock %}
+
+{% block main %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+.linkbutton {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+</style>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+        <img src="http://covers.openlibrary.org/b/isbn/{{rows[0]['isbn']}}-M.jpg" />
+
+    </div>
+    <div class="col-sm">
+        <main class="container p-3">
+        <h1>{{rows[0]["title"]}} </h1>
+        <h4>Author: {{rows[0]["author"]}} </h4>
+        <h4>Published: {{rows[0]["year"]}} </h4>
+        <h4>ISBN: {{rows[0]["isbn"]}} </h4> 
+        </main>
+    </div>
+    
+    <div class="col-sm">
+        
+        <h4>Goodreads Ratings:</h4>
+        # of Ratings: {{"{:,}".format(goodreads['books'][0]["ratings_count"])}} <br>
+        Avg Rating: {{goodreads['books'][0]["average_rating"]}} <br>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+
+    <form method="post">
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" placeholder="Rate out of 5.." name="rating" required>
+        <option value="0">0</option>
+        <option value=".5">0.5</option>
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2">2</option>
+        <option value="2.5" selected>2.5</option>
+        <option value="3">3</option>
+        <option value="3.5">3.5</option>
+        <option value="4">4</option>
+        <option value="4.5">4.5</option>
+        <option value="5">5</option>
+      </select>
+        <br><br>
+            
+        <input autocomplete="off" class="form-control" name="review" placeholder="Comments" type="text" required>
+        <br><br>
+        <button class="btn btn-primary" type="submit" name="btn" value="submit">Submit</button>
+    </form>
+</div>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="page-header">
+                    <h1><small class="pull-right">Review Count: {{review_count[0]["count"]}}</small> User Reviews </h1>
+                  </div>
+                   <div class="comments-list">
+                 <!-- List of comments start here -->
+                    {% for i in reviews %}
+                       <div class="media">
+                           <p class="pull-right"><small>{{i["date"]}} </small></p><br>
+                            <p class="media-left"><br>
+                              <!-- <b>{{i["first_name"]}} {{i["last_name"]}}</b> -->
+                            </p>
+                            <div class="media-body">
+                                
+                              <h4 class="media-heading user_name">
+
+                                {% if i["first_name"] + i["last_name"] == "" %}
+                                    (no name)
+                                {% else %}
+                                    {{i["first_name"]}} {{i["last_name"]}}
+                                {% endif %}
+
+                                </h4>
+                              
+                              {{i["review_text"]}}
+                              
+                              <h4>{{i["rating"]}} out of 5</h4>
+                              <p><small>
+                                    <form method="post"> 
+                                        <select class="form-control" name="review_id" placeholder = "review_id" hidden>                                            
+                                              <option value="{{i['review_id']}}">{{i['review_id']}}</option>   
+                                        </select>
+                                        <button class="linkbutton" type="submit" name="btn" value="like">
+                                        Like ({{ i["likes"]}})</button>
+                                    </form> 
+                                    - <a href="">Share</a></small>
+                              <small>
+                                {% if i["user_id"] == current_user %}
+                                    <form method="post"> 
+                                        <button class="linkbutton" type="submit" name="btn" value="delete">Delete</button>
+                                    </form>
+                                {% endif %}</p>
+                              </small>
+                            </div>
+                          </div>
+                    {%endfor%}          
+
+                          <!-- 1st comment ends -->
+
+                   </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+
+<!-- for loop existing list of user reviews, if any -->
+
+
+
+{% endblock %}
