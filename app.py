@@ -38,9 +38,16 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.route('/')
+@app.route("/", methods = ["GET","POST"])
+# @login_required
 def index():
-	return "OK! Yes"
+	if request.method == "POST":
+		book = request.form.get("book")
+		rows = db.execute("SELECT * FROM books WHERE UPPER(title) LIKE UPPER(:book) OR UPPER(author) LIKE UPPER(:book) OR isbn LIKE UPPER(:book)", {"book": "%" + book + "%"}).fetchall()
+		return render_template("results.html", results = rows)
+	else:
+		return render_template("index.html")
+
 
 if __name__ == "__main__":
 	app.run()
