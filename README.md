@@ -2,6 +2,8 @@
 
 Full instructions: https://docs.cs50.net/ocw/web/projects/1/project1.html
 
+Web programming project.
+
 <b>Objectives:</b>
 Become more comfortable with Python.
 Gain experience with Flask.
