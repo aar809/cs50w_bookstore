@@ -1,4 +1,4 @@
-# cs50w: Project 1 - Books
+# CS50W (Web Track): Project 1 - Books
 
 Full instructions: https://docs.cs50.net/ocw/web/projects/1/project1.html
 
